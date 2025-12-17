@@ -36,7 +36,7 @@ export function GameCard({ card, onClick, isDisabled = false }: GameCardProps) {
           </div>
         ) : (
           /* หน้าหลังการ์ด */
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg text-white text-2xl font-bold">
+          <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-blue-500 to-purple-600 rounded-lg text-white text-2xl font-bold">
             ?
           </div>
         )}
