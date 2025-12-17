@@ -66,7 +66,7 @@ export const CARD_EMOJIS = [
   "🍑",
   "🥭",
   "🍍",
-  "🥥"
+  "🥥",
 ];
 
 export const DIFFICULTY_CONFIG: Record<Difficulty, GameConfig> = {
@@ -82,7 +82,9 @@ export const DIFFICULTY_LABELS = {
 };
 
 export function createGameCards(totalPairs: number): Card[] {
-  const selectedEmojis = CARD_EMOJIS.slice(0, totalPairs);
+  // Shuffle CARD_EMOJIS ก่อนเลือกใช้เพื่อให้ได้ emoji ที่หลากหลายในแต่ละเกม
+  const shuffledEmojis = shuffleArray([...CARD_EMOJIS]);
+  const selectedEmojis = shuffledEmojis.slice(0, totalPairs);
   const cards: Card[] = [];
 
   selectedEmojis.forEach((emoji, index) => {

@@ -16,7 +16,7 @@ import { DIFFICULTY_CONFIG, DIFFICULTY_LABELS } from '@/utils/gameUtils';
 
 export default function MemoryCardGame() {
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
-  const [showWinDialog, setShowWinDialog] = useState(false);
+  const [userClosedDialog, setUserClosedDialog] = useState(false);
 
   const {
     cards,
@@ -29,13 +29,17 @@ export default function MemoryCardGame() {
 
   const config = DIFFICULTY_CONFIG[difficulty];
 
-  // แสดง dialog เมื่อเกมจบ
-  if (gameStats.isGameComplete && !showWinDialog) {
-    setShowWinDialog(true);
-  }
+  // แสดง dialog เมื่อเกมจบและผู้ใช้ยังไม่ได้ปิด dialog
+  const showWinDialog = gameStats.isGameComplete && !userClosedDialog;
+
+  const handleDialogClose = (open: boolean) => {
+    if (!open) {
+      setUserClosedDialog(true);
+    }
+  };
 
   const handleNewGame = (newDifficulty?: Difficulty) => {
-    setShowWinDialog(false);
+    setUserClosedDialog(false); // รีเซ็ต state เมื่อเริ่มเกมใหม่
     if (newDifficulty && newDifficulty !== difficulty) {
       setDifficulty(newDifficulty);
       // ใช้ setTimeout เพื่อให้ state อัปเดตก่อนแล้วค่อยเริ่มเกมใหม่
@@ -140,7 +144,7 @@ export default function MemoryCardGame() {
         )}
 
         {/* Win Dialog */}
-        <Dialog open={showWinDialog} onOpenChange={setShowWinDialog}>
+        <Dialog open={showWinDialog} onOpenChange={handleDialogClose}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle className="text-center text-2xl">
@@ -160,7 +164,7 @@ export default function MemoryCardGame() {
                 🔄 เล่นระดับเดิมอีกครั้ง
               </Button>
 
-              {difficulty !== 'hard' && (
+              {/* {difficulty !== 'hard' && (
                 <Button
                   variant="outline"
                   onClick={() => handleNewGame(
@@ -170,7 +174,7 @@ export default function MemoryCardGame() {
                 >
                   ⬆️ ลองระดับที่ยากขึ้น
                 </Button>
-              )}
+              )} */}
             </div>
           </DialogContent>
         </Dialog>
