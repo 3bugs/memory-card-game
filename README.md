@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 เกมจับคู่การ์ด - Memory Card Game
 
-## Getting Started
+เกมฝึกสมองสำหรับผู้เข้าร่วมงาน **"พลิกโฉมคุณค่าชีวิต 50+ สู่สังคมยุคเทค AI"**
 
-First, run the development server:
+## 🎮 คุณสมบัติของเกม
 
-```bash
+- **3 ระดับความยาก**: ง่าย, ปานกลาง, ยาก
+- **ติดตามสถิติ**: เวลา, จำนวนครั้งที่เล่น, คู่ที่จับได้
+- **รองรับทุกอุปกรณ์**: Desktop, Tablet, มือถือ
+- **UI ที่เข้าใจง่าย**: ออกแบบสำหรับผู้เข้าร่วมงานวัย 50+
+- **เอฟเฟกต์สวยงาม**: Animation และ transition ที่นุ่มนวล
+
+## 🛠️ เทคโนโลยีที่ใช้
+
+- **Next.js 14** - React framework ด้วย App Router
+- **TypeScript** - Type safety และ developer experience ที่ดี
+- **Shadcn UI** - Modern และ accessible UI components
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Hooks** - สำหรับจัดการ state และ game logic
+
+## 🚀 วิธีการเรียกใช้งาน
+
+### ติดตั้ง Dependencies
+
+\`\`\`bash
+npm install
+\`\`\`
+
+### เริ่มต้น Development Server
+
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+เปิดเบราว์เซอร์ไปที่ [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build สำหรับ Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+\`\`\`bash
+npm run build
+npm run start
+\`\`\`
 
-## Learn More
+## 🎯 วิธีการเล่น
 
-To learn more about Next.js, take a look at the following resources:
+1. **เลือกระดับความยาก**: ง่าย (4x4), ปานกลาง (6x6), ยาก (8x8)
+2. **กดปุ่ม "เริ่มเล่น"** เพื่อเริ่มเกม
+3. **คลิกการ์ด 2 ใบ** เพื่อดูว่าเป็นคู่เดียวกันไหม
+4. **จับคู่การ์ดให้ครบทุกคู่** เพื่อชนะเกม
+5. **ดูสถิติการเล่น** และลองท้าทายตัวเองในระดับที่ยากขึ้น
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 โครงสร้างโปรเจกต์
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+\`\`\`
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   └── globals.css        # Global styles
+├── components/            # React components
+│   ├── ui/                # Shadcn UI components
+│   ├── GameCard.tsx       # การ์ดเกม
+│   ├── GameStatsDisplay.tsx # แสดงสถิติ
+│   └── MemoryCardGame.tsx # หน้าเกมหลัก
+├── hooks/
+│   └── useMemoryGame.ts   # Game logic hook
+├── types/
+│   └── game.ts           # TypeScript types
+└── utils/
+    └── gameUtils.ts      # Helper functions
+\`\`\`
 
-## Deploy on Vercel
+## 🎨 การปรับแต่ง
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### เพิ่มเอโมจิใหม่
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+แก้ไขใน \`src/utils/gameUtils.ts\`:
+
+\`\`\`typescript
+export const CARD_EMOJIS = [
+  '🎵', '🎨', '🌸', '🌟', // เพิ่มเอโมจิใหม่ที่นี่
+  // ...
+];
+\`\`\`
+
+### เปลี่ยนระดับความยาก
+
+แก้ไขใน \`src/utils/gameUtils.ts\`:
+
+\`\`\`typescript
+export const DIFFICULTY_CONFIG: Record<Difficulty, GameConfig> = {
+  easy: { difficulty: 'easy', gridSize: 4, totalPairs: 8 },
+  // ปรับ gridSize และ totalPairs ตามต้องการ
+};
+\`\`\`
+
+## 📱 Responsive Design
+
+เกมรองรับการใช้งานบนหน้าจอทุกขนาด:
+- **Desktop**: Grid ขนาดใหญ่ เหมาะสำหรับการเล่นที่บ้าน
+- **Tablet**: Grid ขนาดกลาง เล่นง่าย touch-friendly
+- **Mobile**: Grid ขนาดเล็ก เหมาะสำหรับการเล่นในที่แคบ
+
+## 🌐 Browser Support
+
+รองรับเบราว์เซอร์สมัยใหม่:
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## 📄 License
+
+MIT License - ใช้งานได้อย่างอิสระ
+
+---
+
+สร้างด้วย ❤️ สำหรับงาน **"พลิกโฉมคุณค่าชีวิต 50+ สู่สังคมยุคเทค AI"**
